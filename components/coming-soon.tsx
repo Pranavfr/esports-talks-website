@@ -2,7 +2,7 @@ import { Timer, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
 
-export default function ComingSoonPage({ pageName }) {
+export default function ComingSoonPage({ pageName }: { pageName: string }) {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       {/* Back Button */}
