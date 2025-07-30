@@ -73,7 +73,7 @@ export function FoundersSection() {
           viewport={{ once: true }}
           className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto"
         >
-          {founders.map((founder, index) => (
+          {founders.map((founder) => (
             <motion.div
               key={founder.name}
               variants={item}

@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import {
-  type Container,
-} from "@tsparticles/engine";
+// import {
+//   type Container,
+// } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; // Using slim version for smaller bundle
 import options from "../config/particalJs";
 
