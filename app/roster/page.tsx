@@ -213,7 +213,7 @@ export default function RosterPage() {
                 Team Staff
               </h2>
               <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-                The dedicated professionals behind our team's success
+                The dedicated professionals behind our team&apos;s success
               </p>
             </div>
             
