@@ -37,7 +37,7 @@ export default function PaymentForm({ onSuccess, onError }: PaymentFormProps) {
       } else {
         onSuccess()
       }
-    } catch (error) {
+    } catch {
       onError('An unexpected error occurred.')
     } finally {
       setIsProcessing(false)

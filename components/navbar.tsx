@@ -13,7 +13,7 @@ import { DiscordIcon } from "@/components/ui/discord-icon"
 import Link from "next/link"
 import Image from "next/image"
 import * as React from 'react'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 interface NavLinkProps {
   href: string

@@ -1,9 +1,8 @@
 'use client'
 import React from 'react';
 import { motion } from "framer-motion"
-import { Sparkles, Users, Megaphone, BarChart, ShareIcon, Rocket, Video, Handshake, Trophy, Target, TrendingUp } from 'lucide-react';
+import { Sparkles, Users, Video, Handshake, Trophy, Target, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 
 
 export default function ServicesPage() {

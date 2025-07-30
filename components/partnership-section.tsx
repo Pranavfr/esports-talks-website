@@ -45,7 +45,7 @@ export function PartnershipSection() {
             </h2>
           </div>
           <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto">
-            Join forces with India's premier esports community and unlock unprecedented opportunities for your brand.
+            Join forces with India&apos;s premier esports community and unlock unprecedented opportunities for your brand.
           </p>
         </motion.div>
 
@@ -94,7 +94,7 @@ export function PartnershipSection() {
               Ready to Start Your Partnership?
             </h3>
             <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-              Let's discuss how we can help your brand connect with the gaming community and achieve your marketing goals.
+              Let&apos;s discuss how we can help your brand connect with the gaming community and achieve your marketing goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 

@@ -70,13 +70,13 @@ export function Chat({ user }: ChatProps) {
           setLastMessageRef(snapshot.docs[0])
         }
         setHasMore(snapshot.docs.length === MESSAGES_PER_PAGE)
-      }, (error) => {
+      }, () => {
         // Chat snapshot error handled
         setError('Failed to load messages')
       })
 
       return () => unsubscribe()
-    } catch (err) {
+    } catch {
               // Chat error handled
       setError('Failed to load messages')
     }
@@ -124,7 +124,7 @@ export function Chat({ user }: ChatProps) {
       }
       
       setHasMore(snapshot.docs.length === MESSAGES_PER_PAGE)
-    } catch (err) {
+    } catch {
               // Error loading more messages handled
       setError('Failed to load more messages')
     } finally {
@@ -147,7 +147,7 @@ export function Chat({ user }: ChatProps) {
       
       setNewMessage('')
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    } catch (err) {
+    } catch {
               // Error sending message handled
       setError('Failed to send message')
     }

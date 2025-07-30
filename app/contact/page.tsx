@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { motion } from "framer-motion"
-import { Mail, MessageSquare, Instagram, Twitter, MapPin, Phone, Clock, Users } from 'lucide-react'
+import { Mail, MessageSquare, Instagram, Twitter, MapPin, Clock, Users } from 'lucide-react'
 
 import {
   Card,

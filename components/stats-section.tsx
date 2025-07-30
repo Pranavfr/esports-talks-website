@@ -48,7 +48,7 @@ export function StatsSection() {
             </h2>
           </div>
           <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto">
-            Numbers that speak for themselves - our commitment to building India's most vibrant esports community.
+            Numbers that speak for themselves - our commitment to building India&apos;s most vibrant esports community.
           </p>
         </motion.div>
 

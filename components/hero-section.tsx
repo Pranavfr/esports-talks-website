@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Users, Target, TrendingUp } from "lucide-react"
-import Image from "next/image"
 
 export function HeroSection() {
   return (
@@ -30,7 +29,7 @@ export function HeroSection() {
               </span>
             </h1>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6">
-              INDIA'S PREMIER GAMING COMMUNITY
+              INDIA&apos;S PREMIER GAMING COMMUNITY
             </h2>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Home to passionate gamers, content creators, and esports enthusiasts competing in BGMI, Valorant, 

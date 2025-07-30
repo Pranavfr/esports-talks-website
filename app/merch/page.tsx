@@ -7,7 +7,7 @@ import { useTheme } from "next-themes"
 import { MagicCard } from "@/components/ui/magic-card"
 import { Button } from "@/components/ui/button"
 import { ShoppingBag, ChevronRight, Loader2, RotateCw } from 'lucide-react'
-import { loadStripe } from '@stripe/stripe-js'
+// import { loadStripe } from '@stripe/stripe-js'
 import {
   Dialog,
   DialogContent,
@@ -92,7 +92,7 @@ export default function MerchPage() {
   })
   const [clientSecret, setClientSecret] = useState<string>('')
 
-  const handleBuyNow = (productId: string) => {
+  const handleBuyNow = () => {
     if (typeof product.price === 'string') {
       setError('Price not yet disclosed. Please check back later.')
       return
@@ -397,7 +397,7 @@ export default function MerchPage() {
                             ? 'bg-gray-500 cursor-not-allowed' 
                             : 'bg-blue-600 hover:bg-blue-700'
                         }`}
-                        onClick={() => handleBuyNow(product.id)}
+                        onClick={() => handleBuyNow()}
                         disabled={typeof product.price === 'string'}
                       >
                         {typeof product.price === 'string' ? 'Coming Soon' : 'Buy Now'}

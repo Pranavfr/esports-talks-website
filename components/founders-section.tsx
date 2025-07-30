@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, Trophy, Target, Twitter, Instagram } from "lucide-react"
+import { Users, Target, Twitter, Instagram } from "lucide-react"
 
 const founders = [
   {
@@ -62,7 +62,7 @@ export function FoundersSection() {
             </h2>
           </div>
           <p className="text-lg md:text-xl text-[hsl(var(--muted-foreground))] max-w-3xl mx-auto">
-            The driving force behind Esports Talks, combining passion for gaming with strategic vision to create India's most vibrant esports community.
+            The driving force behind Esports Talks, combining passion for gaming with strategic vision to create India&apos;s most vibrant esports community.
           </p>
         </motion.div>
 
