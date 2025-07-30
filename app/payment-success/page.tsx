@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const paymentIntent = searchParams.get('payment_intent')
@@ -51,5 +51,27 @@ export default function PaymentSuccessPage() {
         </div>
       </motion.div>
     </main>
+  )
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-background flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-gray-900/95 p-8 rounded-lg border border-gray-800 text-center">
+          <div className="animate-pulse">
+            <div className="h-16 w-16 bg-gray-700 rounded-full mx-auto mb-6"></div>
+            <div className="h-8 bg-gray-700 rounded mb-4"></div>
+            <div className="h-4 bg-gray-700 rounded mb-6"></div>
+            <div className="space-y-4">
+              <div className="h-10 bg-gray-700 rounded"></div>
+              <div className="h-10 bg-gray-700 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    }>
+      <PaymentSuccessContent />
+    </Suspense>
   )
 } 
