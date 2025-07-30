@@ -3,8 +3,7 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 
-// Use PropsWithChildren for the props type
-export function ThemeProvider({ children, ...props }: React.PropsWithChildren<any>) {
+export function ThemeProvider({ children, ...props }: React.ComponentProps<typeof NextThemesProvider>) {
   return (
     <NextThemesProvider
       attribute="class"
