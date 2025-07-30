@@ -38,7 +38,7 @@ const toastVariants = cva(
   }
 )
 
-const Toast = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof toastVariants>>(
+const Toast = React.forwardRef<HTMLLIElement, React.ComponentPropsWithoutRef<typeof ToastPrimitives.Root> & VariantProps<typeof toastVariants>>(
   ({ className, variant, ...props }, ref) => {
     return (
       <ToastPrimitives.Root
