@@ -32,7 +32,7 @@ export default function ContributionPage() {
       ]
     },
     {
-      title: "Event Management",
+      title: "Community Assistants",
       icon: Trophy,
       members: [
         { name: "Flying Jatt", link: "https://twitter.com/GodL_Jattt", role: "Event Coordinator" },
@@ -45,8 +45,7 @@ export default function ContributionPage() {
       icon: Users,
       members: [
         { name: "Zaliska", link: "https://www.instagram.com/channel/AbZ4JSZR50cKh8Bb/", role: "Kela Gang Instagram" },
-        { name: "Tentacion", link: "https://www.instagram.com/channel/AbYu68pGaNIi0GKQ/", role: "Godl X Asylum Instagram" },
-        { name: "Marsh♡", link: "https://twitter.com/i/communities/1816449002440655182", role: "Dil Se Godlike X community" }
+        { name: "Tentacion", link: "https://www.instagram.com/channel/AbYu68pGaNIi0GKQ/", role: "Godl X Asylum Instagram" }
       ]
     },
     {
@@ -57,7 +56,8 @@ export default function ContributionPage() {
         { name: "Netra", link: "https://x.com/Netraaa14", role: "Core Member" },
         { name: "Amaira", link: "https://x.com/RyaAkira", role: "Core Member" },
         { name: "Glytz", link: "https://x.com/glitzyyZyer", role: "Core Member" },
-        { name: "Astro", link: "https://x.com/astrx05?s=21", role: "Core Member" }
+        { name: "Astro", link: "https://x.com/astrx05?s=21", role: "Core Member" },
+        { name: "Marsh♡", link: "https://twitter.com/i/communities/1816449002440655182", role: "Core Member" }
       ]
     }
   ]
