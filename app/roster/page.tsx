@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 const players = [
   {
     name: 'Pulse',
+    realName: 'Yashas K.N',
     role: 'IGL',
     image: '/pulse.png',
     instagram: 'https://www.instagram.com/ig.pulse?igsh=cHlvdnlscTlhYWdu',
@@ -20,6 +21,7 @@ const players = [
   },
   {
     name: 'Okay6o',
+    realName: 'Kartikey Sagar',
     role: 'AR MARKSMAN',
     image: '/okay.png',
     instagram: 'https://www.instagram.com/not.okay6o?igsh=MTNtd3N0OHcxczBlYw==',
@@ -30,6 +32,7 @@ const players = [
   },
   {
     name: 'Moon',
+    realName: 'Charu',
     role: 'SMG HEAVY',
     image: '/Moon.png',
     instagram: 'https://www.instagram.com/moonn_0111?igsh=MW4wdXIwOHQ3ZTQ1aA==',
@@ -40,6 +43,7 @@ const players = [
   },
   {
     name: 'Warlord',
+    realName: 'Indreet Singh Dhaliwal',
     role: 'SMG/AR',
     image: '/warlord.png',
     instagram: 'https://www.instagram.com/ig.wxrlord?igsh=MXF0YjFneXl6ZTd3aw==',
@@ -50,6 +54,7 @@ const players = [
   },
   {
     name: 'ItzCold',
+    realName: 'Raj Saha',
     role: 'SMG MARKSMAN',
     image: '/cold.png',
     instagram: 'https://www.instagram.com/_itzcold?igsh=OGxvNDVhNGJtY3Nj',
@@ -60,6 +65,7 @@ const players = [
   },
   {
     name: 'Legend',
+    realName: 'Mohammad Munneb',
     role: 'SMG HEAVY',
     image: '/legend1.png',
     instagram: 'https://www.instagram.com/notlxgend?igsh=bHRoeGF3eWN5bXAy',
@@ -67,6 +73,31 @@ const players = [
     achievements: ['Legend Status', 'Team Anchor'],
     game: 'CODM',
     experience: '3+ Years'
+  },
+];
+
+const staff = [
+  {
+    name: 'Simpzy',
+    realName: 'Aditya',
+    role: 'Coach',
+    image: null,
+    instagram: 'https://www.instagram.com/ig_simpzy?igsh=N2l2cTZ3ZWc5bXhi',
+    bio: 'Strategic Coach & Team Mentor',
+    achievements: ['Team Strategy', 'Performance Optimization'],
+    game: 'CODM',
+    experience: '3+ Years'
+  },
+  {
+    name: 'Phantom',
+    realName: 'Divyamohan',
+    role: 'Manager',
+    image: null,
+    instagram: 'https://www.instagram.com/dv_brute?igsh=MWFubHMzNjNjYWR6OA==',
+    bio: 'Team Manager & Operations Lead',
+    achievements: ['Team Management', 'Tournament Coordination'],
+    game: 'CODM',
+    experience: '2+ Years'
   },
 ];
 
@@ -126,6 +157,9 @@ export default function RosterPage() {
                       <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                         {player.name}
                       </h2>
+                      <p className="text-sm text-gray-400 italic">
+                        {player.realName}
+                      </p>
                       
                       <div className="flex items-center justify-center space-x-2">
                         <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
@@ -165,6 +199,87 @@ export default function RosterPage() {
                 </Card>
               </motion.div>
             ))}
+          </motion.div>
+
+          {/* Staff Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-16"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-4">
+                Team Staff
+              </h2>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                The dedicated professionals behind our team's success
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {staff.map((member, index) => (
+                <motion.div
+                  key={member.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                >
+                  <Card className="relative border-0 bg-black/20 backdrop-blur-sm hover:bg-black/30 transition-all duration-300 hover:scale-105 h-full border border-purple-500/20 overflow-hidden">
+                    <CardContent className="p-6 text-center">
+                      {/* Staff Image Placeholder */}
+                      <div className="w-32 h-32 flex items-center justify-center rounded-full mb-6 mx-auto bg-gradient-to-br from-gray-800 to-purple-900 border-4 border-purple-700 shadow-xl">
+                        <Users className="h-16 w-16 text-purple-300" />
+                      </div>
+
+                      {/* Staff Info */}
+                      <div className="space-y-3">
+                        <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                          {member.name}
+                        </h2>
+                        <p className="text-sm text-gray-400 italic">
+                          {member.realName}
+                        </p>
+                        
+                        <div className="flex items-center justify-center space-x-2">
+                          <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                            {member.role}
+                          </Badge>
+                          <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                            {member.game}
+                          </Badge>
+                        </div>
+
+                        <p className="text-gray-300 text-sm leading-relaxed">
+                          {member.bio}
+                        </p>
+
+                        <div className="flex items-center justify-center space-x-2 text-xs text-gray-400">
+                          <Shield className="h-3 w-3" />
+                          <span>{member.experience} Experience</span>
+                        </div>
+
+                        {/* Social Link */}
+                        <Button
+                          asChild
+                          className="w-full bg-gradient-to-r from-purple-500/20 to-purple-700/20 hover:from-purple-500/30 hover:to-purple-700/30 text-purple-300 border border-purple-500/30 hover:border-purple-500/50 transition-all duration-300"
+                        >
+                          <a
+                            href={member.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center space-x-2"
+                          >
+                            <Instagram className="h-4 w-4" />
+                            <span>Follow on Instagram</span>
+                          </a>
+                        </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
           {/* Team Description */}
