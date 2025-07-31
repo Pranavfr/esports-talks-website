@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "Esports Talks",
     images: [
       {
-        url: '/etpreview.png',
+        url: 'https://esports-talks.vercel.app/etpreview.png',
         width: 1200,
         height: 630,
         alt: 'Esports Talks Preview',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: "Esports Talks",
     description: "Latest updates from our esports community",
-    images: ['/etpreview.png'],
+    images: ['https://esports-talks.vercel.app/etpreview.png'],
   },
   icons: {
     icon: [
