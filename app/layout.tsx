@@ -21,6 +21,28 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Esports Talks",
   description: "Latest updates from our esports community",
+  openGraph: {
+    title: "Esports Talks",
+    description: "Latest updates from our esports community",
+    url: "https://esports-talks.vercel.app",
+    siteName: "Esports Talks",
+    images: [
+      {
+        url: '/etpreview.png',
+        width: 1200,
+        height: 630,
+        alt: 'Esports Talks Preview',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Esports Talks",
+    description: "Latest updates from our esports community",
+    images: ['/etpreview.png'],
+  },
   icons: {
     icon: [
       { url: '/favicon.ico' },
