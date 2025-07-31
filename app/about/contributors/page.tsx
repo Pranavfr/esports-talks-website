@@ -44,8 +44,7 @@ export default function ContributionPage() {
       title: "Community Manager",
       icon: Users,
       members: [
-        { name: "Zaliska", link: "https://www.instagram.com/channel/AbZ4JSZR50cKh8Bb/", role: "Kela Gang Instagram" },
-        { name: "Tentacion", link: "https://www.instagram.com/channel/AbYu68pGaNIi0GKQ/", role: "Godl X Asylum Instagram" }
+        { name: "Zaliska", link: "https://www.instagram.com/channel/AbZ4JSZR50cKh8Bb/", role: "Kela Gang Instagram" }
       ]
     },
     {
