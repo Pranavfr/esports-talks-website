@@ -45,10 +45,7 @@ const founders: Founder[] = [
     name: "Abhishek",
     twitter: "https://x.com/M12Abhishek"
   },
-  {
-    name: "Tenta",
-    twitter: "https://x.com/MeFakeTenta"
-  },
+
   {
     name: "Glytz",
     twitter: "https://x.com/glitzyyZyer"
