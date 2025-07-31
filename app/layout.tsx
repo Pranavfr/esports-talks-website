@@ -32,6 +32,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Esports Talks Preview',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -42,6 +43,11 @@ export const metadata: Metadata = {
     title: "Esports Talks",
     description: "Latest updates from our esports community",
     images: ['https://esports-talks.vercel.app/etpreview.png'],
+  },
+  other: {
+    'og:image:width': '1200',
+    'og:image:height': '630',
+    'og:image:type': 'image/png',
   },
   icons: {
     icon: [
