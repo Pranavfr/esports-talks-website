@@ -52,8 +52,9 @@ export default function SimpleAnalytics() {
       }
     }
 
-    // Try to get location data (with user permission)
+    // Try to get location data automatically (without permission prompt)
     if (navigator.geolocation) {
+      // Use getCurrentPosition with low accuracy and short timeout to avoid permission prompts
       navigator.geolocation.getCurrentPosition(
         (position) => {
           analyticsData.location = {
@@ -65,13 +66,19 @@ export default function SimpleAnalytics() {
           firebaseAnalytics.storeAnalyticsData(analyticsData)
         },
         () => {
-          // Store analytics data without location
+          // If location access is denied or unavailable, store without location
+          analyticsData.location = null
           firebaseAnalytics.storeAnalyticsData(analyticsData)
         },
-        { timeout: 5000, enableHighAccuracy: false }
+        { 
+          timeout: 2000, 
+          enableHighAccuracy: false,
+          maximumAge: 300000 // 5 minutes cache
+        }
       )
     } else {
-      // Store analytics data without location
+      // No geolocation support, store without location
+      analyticsData.location = null
       firebaseAnalytics.storeAnalyticsData(analyticsData)
     }
 
