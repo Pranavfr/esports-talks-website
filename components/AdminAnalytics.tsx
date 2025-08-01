@@ -28,10 +28,9 @@ export default function AdminAnalytics() {
       isAdminPage: true // Flag to identify admin pages
     }
 
-    // Store analytics data in Firestore
-    firebaseAnalytics.storeAnalyticsData(analyticsData)
-
-    // Track custom event for admin pages
+    // Don't store admin page visits in the main analytics collection
+    // This prevents admin visits from affecting the total counts
+    // Only track custom events for admin pages
     firebaseAnalytics.trackEvent('admin_page_visit', analyticsData)
 
     // Track user engagement (time spent on page)

@@ -26,6 +26,33 @@ interface AnalyticsData {
   sessionId: string
   createdAt: unknown
   isAdminPage?: boolean
+  // Enhanced data fields
+  language?: string
+  platform?: string
+  cookieEnabled?: boolean
+  onLine?: boolean
+  connectionType?: string
+  memoryInfo?: {
+    usedJSHeapSize: number
+    totalJSHeapSize: number
+    jsHeapSizeLimit: number
+  }
+  performanceMetrics?: {
+    loadTime: number
+    domContentLoaded: number
+    firstPaint: number
+  }
+  location?: {
+    latitude: number
+    longitude: number
+    accuracy: number
+  }
+  deviceCapabilities?: {
+    touchSupport: boolean
+    webGLSupport: boolean
+    serviceWorkerSupport: boolean
+    pushNotificationSupport: boolean
+  }
 }
 
 interface FirestoreDoc {
@@ -367,6 +394,117 @@ export default function AnalyticsDashboard() {
                   </Card>
                 </motion.div>
               </div>
+
+              {/* Enhanced Analytics Sections */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                {/* Device Information */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Smartphone className="h-5 w-5" />
+                        Device Information
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span className="text-sm">Languages</span>
+                          <span className="text-sm font-medium">
+                            {[...new Set(summary.recentVisits.map(v => v.language).filter(Boolean))].join(', ')}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm">Platforms</span>
+                          <span className="text-sm font-medium">
+                            {[...new Set(summary.recentVisits.map(v => v.platform).filter(Boolean))].join(', ')}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-sm">Connection Types</span>
+                          <span className="text-sm font-medium">
+                            {[...new Set(summary.recentVisits.map(v => v.connectionType).filter(Boolean))].join(', ')}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Performance Metrics */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9 }}
+                >
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <TrendingUp className="h-5 w-5" />
+                        Performance Metrics
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {summary.recentVisits.filter(v => v.performanceMetrics).slice(0, 5).map((visit) => (
+                          <div key={visit.id} className="border-l-2 border-green-500 pl-3">
+                            <div className="flex justify-between text-sm">
+                              <span>Load Time</span>
+                              <span className="font-medium">{Math.round(visit.performanceMetrics?.loadTime || 0)}ms</span>
+                            </div>
+                            <div className="flex justify-between text-xs text-gray-400">
+                              <span>DOM Ready</span>
+                              <span>{Math.round(visit.performanceMetrics?.domContentLoaded || 0)}ms</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </div>
+
+              {/* Geographical Data */}
+              {summary.recentVisits.some(v => v.location) && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 }}
+                  className="mt-6"
+                >
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <Users className="h-5 w-5" />
+                        Visitor Locations
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        {summary.recentVisits.filter(v => v.location).slice(0, 10).map((visit) => (
+                          <div key={visit.id} className="border-l-2 border-purple-500 pl-3">
+                            <div className="flex justify-between text-sm">
+                              <span>{visit.page}</span>
+                              <span className="text-xs text-gray-400">
+                                {new Date(visit.timestamp).toLocaleTimeString()}
+                              </span>
+                            </div>
+                            <div className="text-xs text-gray-400">
+                              Lat: {visit.location?.latitude.toFixed(4)}, 
+                              Long: {visit.location?.longitude.toFixed(4)} 
+                              (Accuracy: {visit.location?.accuracy}m)
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )}
             </>
           )}
         </div>
