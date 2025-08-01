@@ -468,44 +468,6 @@ export default function AnalyticsDashboard() {
                 </motion.div>
               </div>
 
-              {/* Geographical Data */}
-              {summary.recentVisits.some(v => v.location) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0 }}
-                  className="mt-6"
-                >
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <Users className="h-5 w-5" />
-                        Visitor Locations
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        {summary.recentVisits.filter(v => v.location).slice(0, 10).map((visit) => (
-                          <div key={visit.id} className="border-l-2 border-purple-500 pl-3">
-                            <div className="flex items-center justify-between text-sm">
-                              <span>{visit.page}</span>
-                              <span className="text-xs text-gray-400">
-                                {new Date(visit.timestamp).toLocaleTimeString()}
-                              </span>
-                            </div>
-                            <div className="text-xs text-gray-400">
-                              Lat: {visit.location?.latitude.toFixed(4)}, 
-                              Long: {visit.location?.longitude.toFixed(4)} 
-                              (Accuracy: {visit.location?.accuracy}m)
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              )}
-
               {/* Location Status */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -523,23 +485,21 @@ export default function AnalyticsDashboard() {
                   <CardContent>
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-sm">Visitors with Location</span>
-                        <span className="text-sm font-medium text-green-600">
-                          {summary.recentVisits.filter(v => v.location).length} visitors
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-sm">Visitors without Location</span>
+                        <span className="text-sm">Location Collection</span>
                         <span className="text-sm font-medium text-gray-400">
-                          {summary.recentVisits.filter(v => !v.location).length} visitors
+                          Disabled (No Permission Popups)
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm">Location Success Rate</span>
+                        <span className="text-sm">Privacy Mode</span>
+                        <span className="text-sm font-medium text-green-600">
+                          Active
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-sm">User Experience</span>
                         <span className="text-sm font-medium text-blue-600">
-                          {summary.recentVisits.length > 0 
-                            ? Math.round((summary.recentVisits.filter(v => v.location).length / summary.recentVisits.length) * 100)
-                            : 0}%
+                          No Interruptions
                         </span>
                       </div>
                     </div>

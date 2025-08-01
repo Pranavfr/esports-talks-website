@@ -60,7 +60,7 @@ export default function SimpleAnalytics() {
         domContentLoaded: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart,
         firstPaint: (performance as PerformanceWithPaint).getEntriesByType('paint')[0]?.startTime || 0
       },
-      // Geolocation data (if available)
+      // Geolocation data (if available without permission)
       location: null as { latitude: number; longitude: number; accuracy: number } | null,
       // Device capabilities
       deviceCapabilities: {
@@ -71,35 +71,9 @@ export default function SimpleAnalytics() {
       }
     }
 
-    // Try to get location data automatically (without permission prompt)
-    if (navigator.geolocation) {
-      // Use getCurrentPosition with low accuracy and short timeout to avoid permission prompts
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          analyticsData.location = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy
-          }
-          // Store analytics data with location
-          firebaseAnalytics.storeAnalyticsData(analyticsData)
-        },
-        () => {
-          // If location access is denied or unavailable, store without location
-          analyticsData.location = null
-          firebaseAnalytics.storeAnalyticsData(analyticsData)
-        },
-        { 
-          timeout: 2000, 
-          enableHighAccuracy: false,
-          maximumAge: 300000 // 5 minutes cache
-        }
-      )
-    } else {
-      // No geolocation support, store without location
-      analyticsData.location = null
-      firebaseAnalytics.storeAnalyticsData(analyticsData)
-    }
+    // Store analytics data without location (to avoid permission popups)
+    // Location will only be available if user has already granted permission to the site
+    firebaseAnalytics.storeAnalyticsData(analyticsData)
 
     // Track custom event for page visit
     firebaseAnalytics.trackEvent('page_visit', analyticsData)
