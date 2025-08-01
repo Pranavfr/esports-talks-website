@@ -55,7 +55,7 @@ const products: Product[] = [
 ]
 
 export default function MerchPage() {
-  const { theme, resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [showBackView, setShowBackView] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -74,10 +74,6 @@ export default function MerchPage() {
     // Redirect to Google Form
     window.open('https://forms.gle/UbpcmK2HypGtnJtJA', '_blank')
   }
-
-
-
-  const product = products[0] // Get the first product since we only have one
 
   return (
     <main className="min-h-screen bg-background">
