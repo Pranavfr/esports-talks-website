@@ -11,6 +11,7 @@ import {
   Monitor,
   TrendingUp
 } from 'lucide-react'
+import { analyticsApi, AnalyticsEvent } from '@/lib/supabase'
 
 interface AnalyticsData {
   page: string
@@ -42,37 +43,71 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // For now, we'll use mock data since we don't have a database
-    // In the future, this will fetch from your database
-    const mockData: AnalyticsData[] = [
-      {
-        page: '/',
-        timestamp: new Date().toISOString(),
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        referrer: 'https://google.com',
-        screenSize: '1920x1080',
-        timezone: 'Asia/Kolkata'
-      },
-      {
-        page: '/merch',
-        timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-        userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X)',
-        referrer: 'https://instagram.com',
-        screenSize: '375x667',
-        timezone: 'Asia/Kolkata'
-      },
-      {
-        page: '/about',
-        timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
-        referrer: 'https://twitter.com',
-        screenSize: '1440x900',
-        timezone: 'Asia/Kolkata'
+    const fetchAnalyticsData = async () => {
+      try {
+        // Try to fetch from Supabase first
+        const data = await analyticsApi.getAnalyticsSummary()
+        if (data && data.length > 0) {
+          // Convert Supabase data to our format
+          const analyticsData: AnalyticsData[] = data.map((event: AnalyticsEvent) => ({
+            page: event.page,
+            timestamp: event.timestamp,
+            userAgent: event.userAgent,
+            referrer: event.referrer,
+            screenSize: event.screenSize,
+            timezone: event.timezone
+          }))
+          calculateSummary(analyticsData)
+        } else {
+          // Fallback to mock data if no Supabase data
+          const mockData: AnalyticsData[] = [
+            {
+              page: '/',
+              timestamp: new Date().toISOString(),
+              userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+              referrer: 'https://google.com',
+              screenSize: '1920x1080',
+              timezone: 'Asia/Kolkata'
+            },
+            {
+              page: '/merch',
+              timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+              userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X)',
+              referrer: 'https://instagram.com',
+              screenSize: '375x667',
+              timezone: 'Asia/Kolkata'
+            },
+            {
+              page: '/about',
+              timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
+              userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+              referrer: 'https://twitter.com',
+              screenSize: '1440x900',
+              timezone: 'Asia/Kolkata'
+            }
+          ]
+          calculateSummary(mockData)
+        }
+      } catch (error) {
+        console.error('Error fetching analytics data:', error)
+        // Use mock data as fallback
+        const mockData: AnalyticsData[] = [
+          {
+            page: '/',
+            timestamp: new Date().toISOString(),
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            referrer: 'https://google.com',
+            screenSize: '1920x1080',
+            timezone: 'Asia/Kolkata'
+          }
+        ]
+        calculateSummary(mockData)
+      } finally {
+        setLoading(false)
       }
-    ]
+    }
 
-    calculateSummary(mockData)
-    setLoading(false)
+    fetchAnalyticsData()
   }, [])
 
   const calculateSummary = (data: AnalyticsData[]) => {

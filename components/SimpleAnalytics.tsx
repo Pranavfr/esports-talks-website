@@ -2,13 +2,14 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { analyticsApi } from '@/lib/supabase'
 
 export default function SimpleAnalytics() {
   const pathname = usePathname()
 
   useEffect(() => {
     // Track page view
-    const trackPageView = () => {
+    const trackPageView = async () => {
       const analyticsData = {
         page: pathname,
         timestamp: new Date().toISOString(),
@@ -18,20 +19,23 @@ export default function SimpleAnalytics() {
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
       }
 
-      // Send to your analytics endpoint (you can create this later)
-      console.log('Analytics Event:', analyticsData)
-      
-      // For now, we'll just log it. You can send this to your backend later
-      fetch('/api/analytics', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(analyticsData),
-      }).catch(() => {
-        // Silently fail if analytics endpoint doesn't exist
-        console.log('Analytics endpoint not available')
-      })
+      try {
+        // Store in Supabase
+        await analyticsApi.insertEvent(analyticsData)
+        console.log('Analytics Event stored:', analyticsData)
+      } catch {
+        // Fallback to API endpoint
+        console.log('Analytics Event (fallback):', analyticsData)
+        fetch('/api/analytics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(analyticsData),
+        }).catch(() => {
+          console.log('Analytics endpoint not available')
+        })
+      }
     }
 
     trackPageView()
