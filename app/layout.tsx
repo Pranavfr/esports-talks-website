@@ -3,6 +3,8 @@ import type { Metadata } from "next"
 import { Montserrat, Play } from 'next/font/google'
 import "./globals.css"
 import { Providers } from "./providers"
+import GoogleAnalytics from "@/components/GoogleAnalytics"
+import SimpleAnalytics from "@/components/SimpleAnalytics"
 
 
 // Primary font for headings
@@ -71,6 +73,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={`${play.variable} ${montserrat.variable} font-sans antialiased bg-background text-foreground`}>
+        <GoogleAnalytics />
+        <SimpleAnalytics />
         <Providers>{children}</Providers>
       </body>
     </html>
