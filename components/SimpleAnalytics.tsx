@@ -4,6 +4,25 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { firebaseAnalytics } from '@/lib/firebase'
 
+// Type definitions for browser APIs
+interface NavigatorWithConnection extends Navigator {
+  connection?: {
+    effectiveType?: string
+  }
+}
+
+interface PerformanceWithMemory extends Performance {
+  memory?: {
+    usedJSHeapSize: number
+    totalJSHeapSize: number
+    jsHeapSizeLimit: number
+  }
+}
+
+interface PerformanceWithPaint extends Performance {
+  getEntriesByType(type: 'paint'): PerformanceEntry[]
+}
+
 export default function SimpleAnalytics() {
   const pathname = usePathname()
 
@@ -30,19 +49,19 @@ export default function SimpleAnalytics() {
       platform: navigator.platform,
       cookieEnabled: navigator.cookieEnabled,
       onLine: navigator.onLine,
-      connectionType: (navigator as any).connection?.effectiveType || 'unknown',
-      memoryInfo: (performance as any).memory ? {
-        usedJSHeapSize: (performance as any).memory.usedJSHeapSize,
-        totalJSHeapSize: (performance as any).memory.totalJSHeapSize,
-        jsHeapSizeLimit: (performance as any).memory.jsHeapSizeLimit
+      connectionType: (navigator as NavigatorWithConnection).connection?.effectiveType || 'unknown',
+      memoryInfo: (performance as PerformanceWithMemory).memory ? {
+        usedJSHeapSize: (performance as PerformanceWithMemory).memory!.usedJSHeapSize,
+        totalJSHeapSize: (performance as PerformanceWithMemory).memory!.totalJSHeapSize,
+        jsHeapSizeLimit: (performance as PerformanceWithMemory).memory!.jsHeapSizeLimit
       } : null,
       performanceMetrics: {
         loadTime: performance.timing.loadEventEnd - performance.timing.navigationStart,
         domContentLoaded: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart,
-        firstPaint: (performance as any).getEntriesByType('paint')[0]?.startTime || 0
+        firstPaint: (performance as PerformanceWithPaint).getEntriesByType('paint')[0]?.startTime || 0
       },
       // Geolocation data (if available)
-      location: null as any,
+      location: null as { latitude: number; longitude: number; accuracy: number } | null,
       // Device capabilities
       deviceCapabilities: {
         touchSupport: 'ontouchstart' in window,
