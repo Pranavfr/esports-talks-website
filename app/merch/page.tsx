@@ -51,12 +51,25 @@ const products: Product[] = [
     category: 'Apparel',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     hasCustomization: false
+  },
+  {
+    id: '3',
+    name: 'ET Official Gaming Jersey 2025 (New Design)',
+    description: 'Premium quality esports jersey with new ET design. Features moisture-wicking fabric, team logo embroidery, and modern styling.',
+    price: 'Coming Soon',
+    images: {
+      front: '/etjersey.png',
+      back: '/merch/jerseyback.png'
+    },
+    category: 'Apparel',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    hasCustomization: false
   }
 ]
 
 export default function MerchPage() {
   const { resolvedTheme } = useTheme()
-  const [showBackView, setShowBackView] = useState(false)
+  const [backViewStates, setBackViewStates] = useState<{ [key: string]: boolean }>({})
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -73,6 +86,13 @@ export default function MerchPage() {
     
     // Redirect to Google Form
     window.open('https://forms.gle/UbpcmK2HypGtnJtJA', '_blank')
+  }
+
+  const toggleBackView = (productId: string) => {
+    setBackViewStates(prev => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }))
   }
 
   return (
@@ -118,8 +138,8 @@ export default function MerchPage() {
                   <div className="relative h-40 sm:h-48 md:h-56 w-full rounded-lg overflow-hidden bg-gray-100 group">
                     <div className="relative w-full h-full transition-transform duration-500 ease-in-out transform-gpu">
                                              <Image
-                         src={showBackView && product.images.back ? product.images.back : product.images.front}
-                         alt={`${product.name} - ${showBackView ? 'Back View' : 'Front View'}`}
+                         src={backViewStates[product.id] && product.images.back ? product.images.back : product.images.front}
+                         alt={`${product.name} - ${backViewStates[product.id] ? 'Back View' : 'Front View'}`}
                          fill
                          className="object-contain transition-opacity duration-300"
                          priority={index === 0}
@@ -128,9 +148,9 @@ export default function MerchPage() {
                     </div>
                                          {product.images.back && (
                        <button
-                         onClick={() => setShowBackView(!showBackView)}
+                         onClick={() => toggleBackView(product.id)}
                          className="absolute bottom-2 right-2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors transform hover:scale-105"
-                         title={showBackView ? "Show Front" : "Show Back"}
+                         title={backViewStates[product.id] ? "Show Front" : "Show Back"}
                        >
                          <RotateCw className="h-4 w-4" />
                        </button>
