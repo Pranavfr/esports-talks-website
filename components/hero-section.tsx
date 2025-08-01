@@ -6,7 +6,7 @@ import { ArrowRight, Users, Target, TrendingUp } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-32">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
       {/* Background Particles */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
@@ -42,7 +42,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
           >
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">8K+</div>
@@ -63,7 +63,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
           >
             <Button 
               size="lg" 
@@ -88,7 +88,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-5xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 max-w-5xl mx-auto"
           >
             <div className="text-center group">
               <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500/20 to-purple-700/20 flex items-center justify-center mx-auto mb-4 group-hover:from-purple-500/30 group-hover:to-purple-700/30 transition-all duration-300">
