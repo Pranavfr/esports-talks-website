@@ -3,9 +3,33 @@
 import { useState } from 'react'
 import { firebaseAnalytics } from '@/lib/firebase'
 
+interface FirestoreData {
+  id: string
+  page: string
+  timestamp: string
+  userAgent: string
+  referrer: string
+  screenSize: string
+  timezone: string
+  sessionId: string
+  createdAt: unknown
+}
+
+interface FirestoreDoc {
+  id: string
+  page?: string
+  timestamp?: string
+  userAgent?: string
+  referrer?: string
+  screenSize?: string
+  timezone?: string
+  sessionId?: string
+  createdAt?: unknown
+}
+
 export default function TestFirestore() {
   const [status, setStatus] = useState('')
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<FirestoreData[]>([])
 
   const testWrite = async () => {
     try {
@@ -29,7 +53,21 @@ export default function TestFirestore() {
     try {
       setStatus('Reading data...')
       const result = await firebaseAnalytics.getAnalyticsData()
-      setData(result)
+      
+      // Transform the data to match our interface
+      const transformedData: FirestoreData[] = result.map((doc: FirestoreDoc) => ({
+        id: doc.id,
+        page: doc.page || '',
+        timestamp: doc.timestamp || '',
+        userAgent: doc.userAgent || '',
+        referrer: doc.referrer || '',
+        screenSize: doc.screenSize || '',
+        timezone: doc.timezone || '',
+        sessionId: doc.sessionId || '',
+        createdAt: doc.createdAt
+      }))
+      
+      setData(transformedData)
       setStatus(`✅ Read ${result.length} records successfully!`)
     } catch (error) {
       setStatus('❌ Error reading data: ' + error)
