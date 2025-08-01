@@ -3,16 +3,13 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { 
   Users, 
   Eye, 
   Clock, 
-  Globe, 
   Smartphone, 
   Monitor,
-  TrendingUp,
-  Calendar
+  TrendingUp
 } from 'lucide-react'
 
 interface AnalyticsData {
@@ -34,7 +31,6 @@ interface AnalyticsSummary {
 }
 
 export default function AnalyticsDashboard() {
-  const [analyticsData, setAnalyticsData] = useState<AnalyticsData[]>([])
   const [summary, setSummary] = useState<AnalyticsSummary>({
     totalVisits: 0,
     uniquePages: 0,
@@ -75,7 +71,6 @@ export default function AnalyticsDashboard() {
       }
     ]
 
-    setAnalyticsData(mockData)
     calculateSummary(mockData)
     setLoading(false)
   }, [])
@@ -278,10 +273,10 @@ export default function AnalyticsDashboard() {
           transition={{ delay: 0.7 }}
           className="mt-8 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg"
         >
-          <p className="text-sm text-blue-300">
-            <strong>Note:</strong> This is currently showing mock data. To see real analytics, 
-            you'll need to connect a database (Supabase, MongoDB, etc.) to store the analytics data.
-          </p>
+                     <p className="text-sm text-blue-300">
+             <strong>Note:</strong> This is currently showing mock data. To see real analytics, 
+             you&apos;ll need to connect a database (Supabase, MongoDB, etc.) to store the analytics data.
+           </p>
         </motion.div>
       </div>
     </main>

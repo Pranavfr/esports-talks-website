@@ -28,7 +28,7 @@ export default function SimpleAnalytics() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(analyticsData),
-      }).catch(err => {
+      }).catch(() => {
         // Silently fail if analytics endpoint doesn't exist
         console.log('Analytics endpoint not available')
       })
