@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow read/write access to analytics_events collection
+    match /analytics_events/{document} {
+      allow read, write: if true;
+    }
+    
+    // Allow read/write access to all documents (for development)
+    // Remove this in production and add proper authentication
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+} 
