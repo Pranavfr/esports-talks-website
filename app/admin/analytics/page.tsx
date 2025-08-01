@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -24,7 +24,19 @@ interface AnalyticsData {
   screenSize: string
   timezone: string
   sessionId: string
-  createdAt: any
+  createdAt: unknown
+}
+
+interface FirestoreDoc {
+  id: string
+  page?: string
+  timestamp?: string
+  userAgent?: string
+  referrer?: string
+  screenSize?: string
+  timezone?: string
+  sessionId?: string
+  createdAt?: unknown
 }
 
 interface AnalyticsSummary {
@@ -50,7 +62,7 @@ export default function AnalyticsDashboard() {
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
 
-  const fetchAnalyticsData = async () => {
+  const fetchAnalyticsData = useCallback(async () => {
     try {
       setRefreshing(true)
       const data = await firebaseAnalytics.getAnalyticsData()
@@ -72,7 +84,7 @@ export default function AnalyticsDashboard() {
       }
 
       // Transform Firestore data to match our interface
-      const transformedData: AnalyticsData[] = data.map((doc: any) => ({
+      const transformedData: AnalyticsData[] = data.map((doc: FirestoreDoc) => ({
         id: doc.id,
         page: doc.page || '',
         timestamp: doc.timestamp || '',
@@ -100,11 +112,11 @@ export default function AnalyticsDashboard() {
       setLoading(false)
       setRefreshing(false)
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchAnalyticsData()
-  }, [])
+  }, [fetchAnalyticsData])
 
   const calculateSummary = (data: AnalyticsData[]) => {
     const pageVisits = data.reduce((acc, visit) => {
@@ -333,7 +345,7 @@ export default function AnalyticsDashboard() {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
-                        {summary.recentVisits.map((visit, index) => (
+                        {summary.recentVisits.map((visit) => (
                           <div key={visit.id} className="border-l-2 border-blue-500 pl-3">
                             <div className="flex items-center justify-between">
                               <span className="text-sm font-medium">{visit.page}</span>
