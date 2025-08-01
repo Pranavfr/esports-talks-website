@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAnalytics, logEvent } from 'firebase/analytics'
+import { getAnalytics, logEvent, Analytics } from 'firebase/analytics'
 
 // Your Firebase config
 const firebaseConfig = {
@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 
 // Initialize Analytics
-let analytics: any = null
+let analytics: Analytics | null = null
 if (typeof window !== 'undefined') {
   try {
     analytics = getAnalytics(app)
@@ -42,7 +42,7 @@ export const firebaseAnalytics = {
   },
 
   // Track custom event
-  trackEvent: (eventName: string, parameters?: Record<string, any>) => {
+  trackEvent: (eventName: string, parameters?: Record<string, unknown>) => {
     if (analytics) {
       logEvent(analytics, eventName, parameters)
       console.log('✅ Firebase Analytics: Event tracked:', eventName, parameters)

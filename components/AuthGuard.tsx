@@ -8,7 +8,6 @@ interface AuthGuardProps {
 }
 
 export default function AuthGuard({ children }: AuthGuardProps) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [showLogin, setShowLogin] = useState(false)
   const [username, setUsername] = useState('')
@@ -20,7 +19,7 @@ export default function AuthGuard({ children }: AuthGuardProps) {
     // Check if user is already authenticated
     const auth = localStorage.getItem('admin-auth')
     if (auth === 'true') {
-      setIsAuthenticated(true)
+      setShowLogin(false)
     } else {
       setShowLogin(true)
     }
@@ -33,7 +32,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 
     if (username === 'admin' && password === 'dracula') {
       localStorage.setItem('admin-auth', 'true')
-      setIsAuthenticated(true)
       setShowLogin(false)
     } else {
       setError('Invalid credentials. Use admin/dracula')
@@ -42,7 +40,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 
   const handleLogout = () => {
     localStorage.removeItem('admin-auth')
-    setIsAuthenticated(false)
     setShowLogin(true)
     router.push('/admin/analytics')
   }
