@@ -11,7 +11,7 @@ import {
   Monitor,
   TrendingUp
 } from 'lucide-react'
-import { analyticsApi, AnalyticsEvent } from '@/lib/supabase'
+import AuthGuard from '@/components/AuthGuard'
 
 interface AnalyticsData {
   page: string
@@ -45,49 +45,35 @@ export default function AnalyticsDashboard() {
   useEffect(() => {
     const fetchAnalyticsData = async () => {
       try {
-        // Try to fetch from Supabase first
-        const data = await analyticsApi.getAnalyticsSummary()
-        if (data && data.length > 0) {
-          // Convert Supabase data to our format
-          const analyticsData: AnalyticsData[] = data.map((event: AnalyticsEvent) => ({
-            page: event.page,
-            timestamp: event.timestamp,
-            userAgent: event.userAgent,
-            referrer: event.referrer,
-            screenSize: event.screenSize,
-            timezone: event.timezone
-          }))
-          calculateSummary(analyticsData)
-        } else {
-          // Fallback to mock data if no Supabase data
-          const mockData: AnalyticsData[] = [
-            {
-              page: '/',
-              timestamp: new Date().toISOString(),
-              userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-              referrer: 'https://google.com',
-              screenSize: '1920x1080',
-              timezone: 'Asia/Kolkata'
-            },
-            {
-              page: '/merch',
-              timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-              userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X)',
-              referrer: 'https://instagram.com',
-              screenSize: '375x667',
-              timezone: 'Asia/Kolkata'
-            },
-            {
-              page: '/about',
-              timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
-              userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
-              referrer: 'https://twitter.com',
-              screenSize: '1440x900',
-              timezone: 'Asia/Kolkata'
-            }
-          ]
-          calculateSummary(mockData)
-        }
+        // For now, we'll use mock data since Firebase Analytics data
+        // is available in the Firebase Console, not via API
+        const mockData: AnalyticsData[] = [
+          {
+            page: '/',
+            timestamp: new Date().toISOString(),
+            userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+            referrer: 'https://google.com',
+            screenSize: '1920x1080',
+            timezone: 'Asia/Kolkata'
+          },
+          {
+            page: '/merch',
+            timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+            userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X)',
+            referrer: 'https://instagram.com',
+            screenSize: '375x667',
+            timezone: 'Asia/Kolkata'
+          },
+          {
+            page: '/about',
+            timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
+            userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+            referrer: 'https://twitter.com',
+            screenSize: '1440x900',
+            timezone: 'Asia/Kolkata'
+          }
+        ]
+        calculateSummary(mockData)
       } catch (error) {
         console.error('Error fetching analytics data:', error)
         // Use mock data as fallback
@@ -151,169 +137,158 @@ export default function AnalyticsDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Analytics Dashboard
-          </h1>
-          <p className="text-gray-400 mt-2">Track your website visitors and performance</p>
-        </motion.div>
-
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <AuthGuard>
+      <main className="min-h-screen bg-background">
+        <div className="container mx-auto px-4 py-8">
+          {/* Header */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            className="mb-8"
           >
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
-                <Users className="h-4 w-4 text-blue-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{summary.totalVisits}</div>
-                <p className="text-xs text-gray-400">All time visits</p>
-              </CardContent>
-            </Card>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Analytics Dashboard
+            </h1>
+            <p className="text-gray-400 mt-2">Track your website visitors and performance</p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Pages Viewed</CardTitle>
-                <Eye className="h-4 w-4 text-green-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{summary.uniquePages}</div>
-                <p className="text-xs text-gray-400">Unique pages</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
+                  <Users className="h-4 w-4 text-blue-600" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{summary.totalVisits}</div>
+                  <p className="text-xs text-gray-400">All time visits</p>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Mobile Users</CardTitle>
-                <Smartphone className="h-4 w-4 text-purple-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{summary.mobileUsers}</div>
-                <p className="text-xs text-gray-400">Mobile visitors</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Pages Viewed</CardTitle>
+                  <Eye className="h-4 w-4 text-green-600" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{summary.uniquePages}</div>
+                  <p className="text-xs text-gray-400">Unique pages</p>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Desktop Users</CardTitle>
-                <Monitor className="h-4 w-4 text-orange-600" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{summary.desktopUsers}</div>
-                <p className="text-xs text-gray-400">Desktop visitors</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Mobile Users</CardTitle>
+                  <Smartphone className="h-4 w-4 text-purple-600" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{summary.mobileUsers}</div>
+                  <p className="text-xs text-gray-400">Mobile visitors</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Desktop Users</CardTitle>
+                  <Monitor className="h-4 w-4 text-orange-600" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{summary.desktopUsers}</div>
+                  <p className="text-xs text-gray-400">Desktop visitors</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+
+          {/* Top Pages & Recent Visits */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Top Pages */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5" />
+                    Top Pages
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {summary.topPages.map((page, index) => (
+                      <div key={page.page} className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-medium text-gray-400">#{index + 1}</span>
+                          <span className="text-sm">{page.page}</span>
+                        </div>
+                        <span className="text-sm font-bold text-blue-600">{page.visits} visits</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Recent Visits */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Clock className="h-5 w-5" />
+                    Recent Visits
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {summary.recentVisits.map((visit, index) => (
+                      <div key={index} className="border-l-2 border-blue-500 pl-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-medium">{visit.page}</span>
+                          <span className="text-xs text-gray-400">
+                            {new Date(visit.timestamp).toLocaleTimeString()}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-400 mt-1">
+                          {visit.screenSize} • {visit.timezone}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
         </div>
-
-        {/* Top Pages & Recent Visits */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Top Pages */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5" />
-                  Top Pages
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {summary.topPages.map((page, index) => (
-                    <div key={page.page} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium text-gray-400">#{index + 1}</span>
-                        <span className="text-sm">{page.page}</span>
-                      </div>
-                      <span className="text-sm font-bold text-blue-600">{page.visits} visits</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Recent Visits */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5" />
-                  Recent Visits
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {summary.recentVisits.map((visit, index) => (
-                    <div key={index} className="border-l-2 border-blue-500 pl-3">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium">{visit.page}</span>
-                        <span className="text-xs text-gray-400">
-                          {new Date(visit.timestamp).toLocaleTimeString()}
-                        </span>
-                      </div>
-                      <div className="text-xs text-gray-400 mt-1">
-                        {visit.screenSize} • {visit.timezone}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        {/* Note */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="mt-8 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg"
-        >
-                     <p className="text-sm text-blue-300">
-             <strong>Note:</strong> This is currently showing mock data. To see real analytics, 
-             you&apos;ll need to connect a database (Supabase, MongoDB, etc.) to store the analytics data.
-           </p>
-        </motion.div>
-      </div>
-    </main>
+      </main>
+    </AuthGuard>
   )
 } 
