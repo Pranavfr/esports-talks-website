@@ -9,6 +9,7 @@ import { ServicesSection } from "@/components/services-section"
 import { StatsSection } from "@/components/stats-section"
 import { PartnershipSection } from "@/components/partnership-section"
 import { Particales } from "@/components/ui/particles"
+import { Navbar } from "@/components/navbar"
 
 export default async function Page() {
 
@@ -16,6 +17,7 @@ export default async function Page() {
     <div className="relative min-h-screen bg-black">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
       <div className="container mx-auto px-4 relative z-10">
+        <Navbar />
         <Particales />
         <HeroSection />
         

@@ -6,6 +6,7 @@ import { Sparkles, Trophy, Users, Calendar, MapPin, Target, Zap, Star, CheckCirc
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Navbar } from "@/components/navbar";
 
 export default function EventPage() {
   const upcomingEvents = [
@@ -47,6 +48,7 @@ export default function EventPage() {
     <div className="relative min-h-screen bg-black">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
       <div className="container mx-auto px-4 relative z-10">
+        <Navbar />
         <div className="py-24">
           {/* Header Section */}
           <motion.div

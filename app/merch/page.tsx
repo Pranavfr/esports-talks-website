@@ -7,6 +7,7 @@ import { useTheme } from "next-themes"
 import { MagicCard } from "@/components/ui/magic-card"
 import { Button } from "@/components/ui/button"
 import { ShoppingBag, RotateCw } from 'lucide-react'
+import { Navbar } from "@/components/navbar"
 
 interface Product {
   id: string
@@ -110,6 +111,7 @@ export default function MerchPage() {
 
   return (
     <main className="min-h-screen bg-background">
+      <Navbar />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-24">
         {/* Header Section */}
         <motion.div

@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from "framer-motion"
 import { Sparkles, Users, Video, Handshake, Trophy, Target, TrendingUp } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
+import { Navbar } from "@/components/navbar";
 
 
 export default function ServicesPage() {
@@ -55,7 +56,7 @@ export default function ServicesPage() {
     <div className="relative min-h-screen bg-black">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
       <div className="container mx-auto px-4 relative z-10">
-        
+        <Navbar />
         <div className="py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

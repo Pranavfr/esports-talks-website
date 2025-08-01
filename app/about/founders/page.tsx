@@ -2,6 +2,7 @@
 import { motion } from "framer-motion"
 import { Users, Twitter } from 'lucide-react'
 import Ripple from "@/components/ui/ripple"
+import { Navbar } from "@/components/navbar"
 
 interface Founder {
   name: string
@@ -18,7 +19,7 @@ const founders: Founder[] = [
     twitter: "https://x.com/craven765"
   },
   {
-    name: "trollesports",
+    name: "Trollesports",
     twitter: "https://x.com/trollesportss"
   },
   {
@@ -89,24 +90,27 @@ const item = {
 
 export default function FoundersPage() {
   return (
-      <div className="relative min-h-screen overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="relative h-full w-full overflow-hidden">
-            <Ripple />
-          </div>
+    <div className="relative min-h-screen bg-black">
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
+      <div className="absolute inset-0 z-0">
+        <div className="relative h-full w-full overflow-hidden">
+          <Ripple />
         </div>
-        
-        <div className="relative z-10 container mx-auto px-4 py-24">
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <Navbar />
+        <div className="py-24">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-4">
               EsportsTalk Founders
             </h1>
-            <div className="flex items-center justify-center gap-2 text-blue-400">
+            <div className="flex items-center justify-center gap-2 text-purple-300">
               <Users className="h-5 w-5" />
               <span className="text-lg">The Mind Behind This Community</span>
             </div>
@@ -122,9 +126,9 @@ export default function FoundersPage() {
               <motion.div
                 key={founder.name}
                 variants={item}
-                className="bg-white/5 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/10 transition-all duration-300 border border-white/10 group"
+                className="bg-black/20 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-black/30 transition-all duration-300 border border-purple-500/20 group"
               >
-                <h3 className="font-bold text-xl mb-3 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                <h3 className="font-bold text-xl mb-3 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                   {founder.name}
                 </h3>
                 
@@ -132,7 +136,7 @@ export default function FoundersPage() {
                   href={founder.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-gray-400 hover:text-blue-400 transition-colors duration-300"
+                  className="inline-flex items-center gap-2 text-gray-400 hover:text-purple-300 transition-colors duration-300"
                 >
                   <Twitter className="h-5 w-5" />
                   <span className="text-sm">Follow</span>
@@ -141,6 +145,7 @@ export default function FoundersPage() {
             ))}
           </motion.div>
         </div>
+      </div>
     </div>
   )
 }

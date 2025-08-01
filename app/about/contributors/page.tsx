@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Image from 'next/image'
+import { Navbar } from "@/components/navbar"
 
 export default function ContributionPage() {
   const teams = [
@@ -65,7 +66,7 @@ export default function ContributionPage() {
     <div className="relative min-h-screen bg-black">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
       <div className="container mx-auto px-4 relative z-10">
-        
+        <Navbar />
         <div className="py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

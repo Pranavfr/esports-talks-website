@@ -6,7 +6,7 @@ import { ArrowRight, Users, Target, TrendingUp } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8 md:pt-16">
       {/* Background Particles */}
       <div className="absolute inset-0 bg-black">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-blue-900/20" />
