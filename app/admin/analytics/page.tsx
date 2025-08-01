@@ -25,6 +25,7 @@ interface AnalyticsData {
   timezone: string
   sessionId: string
   createdAt: unknown
+  isAdminPage?: boolean
 }
 
 interface FirestoreDoc {
@@ -119,20 +120,23 @@ export default function AnalyticsDashboard() {
   }, [fetchAnalyticsData])
 
   const calculateSummary = (data: AnalyticsData[]) => {
-    const pageVisits = data.reduce((acc, visit) => {
+    // Filter out admin pages from total counts
+    const nonAdminData = data.filter(visit => !visit.page.startsWith('/admin'))
+    
+    const pageVisits = nonAdminData.reduce((acc, visit) => {
       acc[visit.page] = (acc[visit.page] || 0) + 1
       return acc
     }, {} as Record<string, number>)
 
-    const mobileUsers = data.filter(visit =>
+    const mobileUsers = nonAdminData.filter(visit =>
       visit.userAgent.includes('iPhone') ||
       visit.userAgent.includes('Android') ||
       visit.userAgent.includes('Mobile')
     ).length
 
-    const desktopUsers = data.length - mobileUsers
+    const desktopUsers = nonAdminData.length - mobileUsers
 
-    const uniqueSessions = new Set(data.map(visit => visit.sessionId)).size
+    const uniqueSessions = new Set(nonAdminData.map(visit => visit.sessionId)).size
 
     const topPages = Object.entries(pageVisits)
       .map(([page, visits]) => ({ page, visits }))
@@ -140,13 +144,13 @@ export default function AnalyticsDashboard() {
       .slice(0, 5)
 
     setSummary({
-      totalVisits: data.length,
+      totalVisits: nonAdminData.length,
       uniquePages: Object.keys(pageVisits).length,
       mobileUsers,
       desktopUsers,
       uniqueSessions,
       topPages,
-      recentVisits: data.slice(0, 10)
+      recentVisits: data.slice(0, 10) // Keep all visits (including admin) for recent visits
     })
   }
 

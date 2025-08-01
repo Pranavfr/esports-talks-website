@@ -1,39 +1,27 @@
 // app/layout.tsx
-import type { Metadata } from "next"
-import { Montserrat, Play } from 'next/font/google'
-import "./globals.css"
-import { Providers } from "./providers"
-import GoogleAnalytics from "@/components/GoogleAnalytics"
-import SimpleAnalytics from "@/components/SimpleAnalytics"
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { ThemeProvider } from './theme-provider'
+import GoogleAnalytics from '@/components/GoogleAnalytics'
+import SimpleAnalytics from '@/components/SimpleAnalytics'
+import AdminAnalytics from '@/components/AdminAnalytics'
 
-
-// Primary font for headings
-const play = Play({ 
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-play',
-})
-
-// Secondary font for body text
-const montserrat = Montserrat({ 
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-})
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Esports Talks",
-  description: "Latest updates from our esports community",
+  title: 'EsportsTalks',
+  description: 'Your premier destination for esports news, updates, and community engagement.',
   openGraph: {
-    title: "Esports Talks",
-    description: "Latest updates from our esports community",
-    url: "https://esports-talks.vercel.app",
-    siteName: "Esports Talks",
+    title: 'EsportsTalks',
+    description: 'Your premier destination for esports news, updates, and community engagement.',
+    url: 'https://esports-talks.vercel.app',
+    siteName: 'EsportsTalks',
     images: [
       {
         url: 'https://esports-talks.vercel.app/etpreview.png',
         width: 1200,
         height: 630,
-        alt: 'Esports Talks Preview',
         type: 'image/png',
       },
     ],
@@ -42,25 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Esports Talks",
-    description: "Latest updates from our esports community",
+    title: 'EsportsTalks',
+    description: 'Your premier destination for esports news, updates, and community engagement.',
     images: ['https://esports-talks.vercel.app/etpreview.png'],
-  },
-  other: {
-    'og:image:width': '1200',
-    'og:image:height': '630',
-    'og:image:type': 'image/png',
-  },
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-touch-icon.png' },
-    ],
   },
 }
 
@@ -71,11 +43,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
-      <body className={`${play.variable} ${montserrat.variable} font-sans antialiased bg-background text-foreground`}>
-        <GoogleAnalytics />
-        <SimpleAnalytics />
-        <Providers>{children}</Providers>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <GoogleAnalytics />
+          <SimpleAnalytics />
+          <AdminAnalytics />
+        </ThemeProvider>
       </body>
     </html>
   )

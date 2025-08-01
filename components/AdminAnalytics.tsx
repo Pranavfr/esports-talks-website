@@ -4,22 +4,19 @@ import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { firebaseAnalytics } from '@/lib/firebase'
 
-export default function SimpleAnalytics() {
+export default function AdminAnalytics() {
   const pathname = usePathname()
 
   useEffect(() => {
-    // Skip tracking admin pages for total visit counts
-    if (pathname.startsWith('/admin')) {
+    // Only track admin pages
+    if (!pathname.startsWith('/admin')) {
       return
     }
 
     // Generate a unique session ID for this visit
     const sessionId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
     
-    // Track page view with Firebase Analytics
-    firebaseAnalytics.trackPageView(pathname)
-
-    // Track additional analytics data
+    // Track admin page visit (for recent visits display only)
     const analyticsData = {
       page: pathname,
       timestamp: new Date().toISOString(),
@@ -27,14 +24,15 @@ export default function SimpleAnalytics() {
       referrer: document.referrer,
       screenSize: `${window.screen.width}x${window.screen.height}`,
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      sessionId
+      sessionId,
+      isAdminPage: true // Flag to identify admin pages
     }
 
     // Store analytics data in Firestore
     firebaseAnalytics.storeAnalyticsData(analyticsData)
 
-    // Track custom event with detailed data
-    firebaseAnalytics.trackEvent('page_visit', analyticsData)
+    // Track custom event for admin pages
+    firebaseAnalytics.trackEvent('admin_page_visit', analyticsData)
 
     // Track user engagement (time spent on page)
     const startTime = Date.now()
