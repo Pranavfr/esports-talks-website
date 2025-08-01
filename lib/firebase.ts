@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { getAnalytics, logEvent, Analytics } from 'firebase/analytics'
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit } from 'firebase/firestore'
 
 // Your Firebase config
 const firebaseConfig = {
@@ -25,6 +26,9 @@ if (typeof window !== 'undefined') {
     console.log('❌ Firebase Analytics not available:', error)
   }
 }
+
+// Initialize Firestore
+const db = getFirestore(app)
 
 // Analytics functions
 export const firebaseAnalytics = {
@@ -58,6 +62,44 @@ export const firebaseAnalytics = {
         engagement_time_msec: engagementTimeMs
       })
       console.log('✅ Firebase Analytics: User engagement tracked')
+    }
+  },
+
+  // Store analytics data in Firestore
+  storeAnalyticsData: async (data: {
+    page: string
+    timestamp: string
+    userAgent: string
+    referrer: string
+    screenSize: string
+    timezone: string
+    sessionId?: string
+  }) => {
+    try {
+      await addDoc(collection(db, 'analytics_events'), {
+        ...data,
+        createdAt: new Date()
+      })
+      console.log('✅ Analytics data stored in Firestore:', data)
+    } catch (error) {
+      console.error('❌ Error storing analytics data:', error)
+    }
+  },
+
+  // Get analytics data from Firestore
+  getAnalyticsData: async () => {
+    try {
+      const q = query(collection(db, 'analytics_events'), orderBy('createdAt', 'desc'), limit(100))
+      const querySnapshot = await getDocs(q)
+      const data = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      console.log('✅ Analytics data retrieved from Firestore:', data.length, 'records')
+      return data
+    } catch (error) {
+      console.error('❌ Error getting analytics data:', error)
+      return []
     }
   }
 }
