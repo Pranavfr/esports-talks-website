@@ -54,12 +54,25 @@ const products: Product[] = [
   },
   {
     id: '3',
-    name: 'ET Official Gaming Jersey 2025 (New Design)',
-    description: 'Premium quality esports jersey with new ET design. Features moisture-wicking fabric, team logo embroidery, and modern styling.',
-    price: 'Coming Soon',
+    name: 'ET Official Gaming Jersey 2025 (New Design - Custom)',
+    description: 'Premium quality esports jersey with new ET design. Features moisture-wicking fabric, team logo embroidery, and player name customization option.',
+    price: 899,
     images: {
       front: '/etjersey.png',
       back: '/merch/jerseyback.png'
+    },
+    category: 'Apparel',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    hasCustomization: true
+  },
+  {
+    id: '4',
+    name: 'ET Official Gaming Jersey 2025 (New Design - Standard)',
+    description: 'Premium quality esports jersey with new ET design. Features moisture-wicking fabric and team logo embroidery.',
+    price: 799,
+    images: {
+      front: '/etjersey.png',
+      back: ''
     },
     category: 'Apparel',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
