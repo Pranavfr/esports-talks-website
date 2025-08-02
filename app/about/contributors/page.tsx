@@ -21,7 +21,7 @@ export default function ContributionPage() {
       title: "Developer",
       icon: Code,
       members: [
-        { name: "Dracula", link: "https://x.com/draculaaaahu", role: "Lead Developer", github: "https://github.com/draculaaaahu", portfolio: "https://draculaaaahu.vercel.app" }
+        { name: "Dracula", link: "https://x.com/draculaaaahu", role: "Lead Developer", github: "https://github.com/Pranavfr", portfolio: "https://pranav-portfolio-ten.vercel.app/" }
       ]
     },
     {
@@ -229,6 +229,9 @@ export default function ContributionPage() {
                           <h3 className="text-3xl font-black text-white mb-2 drop-shadow-lg hover:text-red-300 transition-colors duration-300 cursor-pointer">
                             Dracula
                           </h3>
+                          <p className="text-sm text-gray-300 mb-2">
+                            (Pranav)
+                          </p>
                         </a>
                         <Badge variant="outline" className="border-red-500/70 text-red-200 bg-red-500/30 text-sm font-semibold mb-4">
                           Lead Developer
@@ -245,7 +248,7 @@ export default function ContributionPage() {
                             size="sm" 
                             variant="outline"
                             className="border-red-500/70 text-red-200 hover:bg-red-500/30 text-xs h-7"
-                            onClick={() => window.open('https://github.com', '_blank')}
+                            onClick={() => window.open('https://github.com/Pranavfr', '_blank')}
                           >
                             <Github className="h-3 w-3 mr-1" />
                             GitHub
@@ -254,7 +257,7 @@ export default function ContributionPage() {
                             size="sm" 
                             variant="outline"
                             className="border-red-500/70 text-red-200 hover:bg-red-500/30 text-xs h-7"
-                            onClick={() => window.open('https://portfolio.com', '_blank')}
+                            onClick={() => window.open('https://pranav-portfolio-ten.vercel.app/', '_blank')}
                           >
                             <ExternalLink className="h-3 w-3 mr-1" />
                             Portfolio
