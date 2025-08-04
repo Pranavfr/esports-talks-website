@@ -29,7 +29,7 @@ export default function ContributionPage() {
       icon: Sparkles,
       members: [
         { name: "Kanishq", link: null, role: "Graphic Designer" },
-        { name: "Velocity", link: "https://x.com/Godl_Velocity", role: "SMM Specialist" }
+        { name: "Velocity", link: "https://x.com/Ve1ocityJOD", role: "SMM Specialist" }
       ]
     },
     {
