@@ -31,7 +31,7 @@ export default function ContactPage() {
       title: "Discord",
       description: "Join our community",
       contact: "Join Discord Server",
-      action: "https://discord.gg/8hv9AqcQNm",
+      action: "https://discord.gg/Z8Amfxe7f4",
       color: "from-purple-500/20 to-purple-700/20",
       iconColor: "text-purple-300",
       borderColor: "border-purple-500/20"

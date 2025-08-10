@@ -102,7 +102,7 @@ export function Footer() {
                 label="Twitter Community"
               />
               <SocialLink 
-                href="https://discord.gg/8hv9AqcQNm"
+                href="https://discord.gg/Z8Amfxe7f4"
                 icon={DiscordIcon}
                 label="Discord Server"
               />
