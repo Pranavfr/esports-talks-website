@@ -8,14 +8,14 @@ const services = [
   {
     icon: Users,
     title: "Community Management",
-    description: "8K+ active members across platforms with dedicated moderation and engagement strategies.",
-    stats: "8K+ Members"
+    description: "30K+ active members across platforms with dedicated moderation and engagement strategies.",
+    stats: "30K+ Members"
   },
   {
     icon: Video,
     title: "Content Creation",
     description: "Gaming content, tournaments, and live streams that engage and entertain our community.",
-    stats: "40K+ Engagement"
+    stats: "60K+ Engagement"
   },
   {
     icon: Handshake,

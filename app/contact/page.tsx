@@ -62,7 +62,7 @@ export default function ContactPage() {
     {
       icon: Users,
       title: "Community Size",
-      value: "8K+ Members",
+      value: "30K+ Members",
       description: "Active community across platforms"
     },
     {

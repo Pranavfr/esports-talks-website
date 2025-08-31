@@ -7,19 +7,19 @@ import { Users, TrendingUp, Eye, Award } from "lucide-react"
 const stats = [
   {
     icon: Users,
-    value: "8K+",
+    value: "30K+",
     label: "Community Members",
     description: "Active members across all platforms"
   },
   {
     icon: Eye,
-    value: "800K+",
+    value: "1M+",
     label: "Monthly Impressions",
     description: "Reach across social media platforms"
   },
   {
     icon: TrendingUp,
-    value: "40K+",
+    value: "60K+",
     label: "Engagement Rate",
     description: "High interaction and participation"
   },

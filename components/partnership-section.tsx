@@ -14,7 +14,7 @@ const benefits = [
   {
     icon: Target,
     title: "Proven Track Record",
-    description: "Successful community building with 8K+ active members and growing."
+    description: "Successful community building with 30K+ active members and growing."
   },
   {
     icon: TrendingUp,

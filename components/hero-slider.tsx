@@ -82,8 +82,8 @@ export function HeroSlider() {
                     <h2 className="text-xl md:text-2xl font-bold">96 hours Insights of X community</h2>
                     <div className="space-y-2 mb-4 text-base md:text-lg">
                       <p>New posts: 3K+</p>
-                      <p>Like Count: 40K+</p>
-                      <p>Impressions: 800K+</p>
+                      <p>Like Count: 60K+</p>
+                      <p>Impressions: 1M+</p>
                       <p>Space conducted:</p>
                       <ul className="ml-4">
                         <li>Official: 1</li>

@@ -10,16 +10,16 @@ export default function ServicesPage() {
   const services = [
     {
       title: "Community Management",
-      description: "8K+ active members across platforms with dedicated moderation, engagement strategies, and 24/7 community support.",
+      description: "30K+ active members across platforms with dedicated moderation, engagement strategies, and 24/7 community support.",
       icon: Users,
-      stats: "8K+ Members",
+      stats: "30K+ Members",
       features: ["Discord Server", "Social Media", "Event Coordination"]
     },
     {
       title: "Content Creation",
       description: "High-quality gaming content, tournament coverage, live streams, and viral social media posts that drive engagement.",
       icon: Video,
-      stats: "40K+ Engagement",
+      stats: "60K+ Engagement",
       features: ["Live Streaming", "Video Production", "Social Media"]
     },
     {
@@ -47,7 +47,7 @@ export default function ServicesPage() {
       title: "Marketing Solutions",
       description: "Comprehensive digital marketing strategies tailored for gaming brands and esports organizations.",
       icon: TrendingUp,
-      stats: "800K+ Reach",
+      stats: "1M+ Reach",
       features: ["Social Media Marketing", "Influencer Campaigns", "Analytics"]
     }
   ];

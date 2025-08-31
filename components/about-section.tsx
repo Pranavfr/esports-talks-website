@@ -38,7 +38,7 @@ export function AboutSection() {
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Community First</h3>
               <p className="text-gray-300">
-                A vibrant community of 8K+ passionate gamers and esports enthusiasts, fostering connections and building lasting relationships.
+                A vibrant community of 30K+ passionate gamers and esports enthusiasts, fostering connections and building lasting relationships.
               </p>
             </CardContent>
           </Card>
