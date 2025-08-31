@@ -45,15 +45,15 @@ export function HeroSection() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto"
           >
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">8K+</div>
+              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">30K+</div>
               <div className="text-gray-400 font-medium">COMMUNITY MEMBERS</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">800K+</div>
+              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">1M+</div>
               <div className="text-gray-400 font-medium">MONTHLY IMPRESSIONS</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">40K+</div>
+              <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">60K+</div>
               <div className="text-gray-400 font-medium">ENGAGEMENT RATE</div>
             </div>
           </motion.div>
